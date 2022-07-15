@@ -90,6 +90,70 @@ const data = [
   }
 ];
 
+const extraStuff = {
+  title: "First name greatest!", 
+  date: "7/15/22", 
+  firstParagraph: "im the first paragraph", 
+  secondParagraph: "I am the segundo paragraph", 
+  thirdParagraph: "Yo soy el tercer parrafo"
+};
+
+//This is where im going to append all my elements
+const ParentElement = document.querySelector("body .articles");
+
+function makeArticle({title, date, firstParagraph, secondParagraph, thirdParagraph}){
+
+  //Create all Elements
+  const article = document.createElement("div");
+  const articleTitle = document.createElement("h2");
+  const articleDate = document.createElement("p");
+  const articleParagraph1 = document.createElement("h3");
+  const articleParagraph2 = document.createElement("h3")
+  const articleParagraph3 = document.createElement("h3")
+  const articleSpan = document.createElement("span")
+
+
+  //Structure the Elements
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(articleParagraph1);
+  article.appendChild(articleParagraph2);
+  article.appendChild(articleParagraph3);
+  article.appendChild(articleSpan);
+
+
+  //Add the proper class names 
+  article.classList.add("article");
+  articleDate.classList.add("date");
+  articleSpan.classList.add("expandButton");
+
+
+  //Event listener for Span
+  articleSpan.addEventListener("click", () => {
+  article.classList.toggle("article-open");
+  })
+
+
+  //Setting the text
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articleParagraph1.textContent = firstParagraph;
+  articleParagraph2.textContent = secondParagraph;
+  articleParagraph3.textContent = thirdParagraph;
+  articleSpan.textContent = ("+");
+
+
+  return article;
+}
+
+
+data.forEach(article => {
+  ParentElement.appendChild(makeArticle(article));
+})
+
+ParentElement.appendChild(makeArticle(extraStuff));
+
+
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
